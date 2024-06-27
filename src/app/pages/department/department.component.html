@@ -1,1 +1,69 @@
-<p>department works!</p>
+<div class="row">
+        <div class="col-8 ps-0 pe-0 my-2">
+            <div class="card">
+                <div class="card-header bg-primary">
+                    Department List
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Sr. No.</th>
+                                        <th>Dept. ID.</th>
+                                        <th>Dept. Name</th>
+                                        <th>Created Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (department of departList; track $index) {
+                                        <tr class="text-center">
+                                            <td>{{$index+1}}</td>
+                                            <td>{{department.deptId}}</td>
+                                            <td>{{department.deptName}}</td>
+                                            <td>{{department.createdDate | date:'dd-MMM-yyyy'}}</td>
+                                            <td>
+                                                <button class="btn btn-info" (click)="onEditClick(department)">Edit</button>
+                                                <button class="btn btn-danger mx-2" (click)="onDeleteClick(department.deptId)">Delete</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 ps-0 pe-0 my-2">
+            <div class="card">
+                <div class="card-header bg-primary">
+                   New Department
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <form [formGroup]="departForm">
+                            <div class="col-12">
+                                <label for="Dname">Department Name</label>
+                                <input type="text" name="Dname" class="form-control" formControlName="deptName" >
+                            </div>
+                            <div class="col-12 mt-1">
+                                <label for="DCDate">Department Creation Date</label>
+                                <input type="date" name="DCDate" class="form-control" formControlName="createdDate" >
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row pt-2">
+                        <div class="col-6 text-center">
+                            <button class="btn btn-secondary" (click)=" isForEdit ? onEditSubmit() : submitDepartment()">{{isForEdit ? 'Edit':'Submit'}}</button>
+                        </div>
+                        <div class="col-6 text-center">
+                            <button class="btn btn-danger" (click)="this.departForm.reset()">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

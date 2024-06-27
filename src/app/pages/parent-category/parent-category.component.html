@@ -1,1 +1,82 @@
-<p>parent-category works!</p>
+<div class="row">
+    <div class="col-8 ps-0 pe-0 my-2">
+        <div class="card">
+            <div class="card-header bg-primary">
+                Category List
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Sr. No.</th>
+                                    <th>Category. ID.</th>
+                                    <th>Category. Name</th>
+                                    <th>Department Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (category of parentCategoryList; track $index) {
+                                    <tr class="text-center">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{category.categoryId}}</td>
+                                        <td>{{category.categoryName}}</td>
+                                        <td>{{category.deptName}}</td>
+                                        <td>
+                                            <button class="btn btn-info" (click)="onEditClick(category)">Edit</button>
+                                            <button class="btn btn-danger mx-2" (click)="onDeleteClick(category.categoryId)">Delete</button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 ps-0 pe-0 my-2">
+        <div class="card">
+            <div class="card-header bg-primary">
+               New Category
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <form [formGroup]="parentForm">
+                        <div class="col-12">
+                            <label for="Dname">Category Name</label>
+                            <input type="text" name="Dname" class="form-control" formControlName="categoryName" >
+                        </div>
+                        <div class="col-12 mt-1">
+                            <label for="DCDate">Department Name</label>
+                            <!-- <input type="date" name="DCDate" class="form-control" formControlName="createdDate" > -->
+                            @if(isForEdit){
+                                <!-- <option hidden selected>{{isForEdit ? parentForm.deptID : 'Select Dept.'}}</option> -->
+                                 <br>
+                                 <input type="text" [value]="parentForm.deptID" class="form-control" formControlName="deptId" [disabled]="true" >
+                            }@else {
+                             <select name="" id="" class="form-select" formControlName="deptId">
+                                    <option value="" hidden selected>Select Dept.</option>
+                                    @for (dept of departmentList; track $index) {
+                                        <option [value]="dept.deptId" >{{dept.deptName}}</option>
+                                    }
+                                    <!-- <option [value]="parentForm.value.deptId">{{parentForm.value.deptId}}</option> -->
+                                </select>
+                            }
+                        </div>
+                    </form>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 text-center">
+                        <button class="btn btn-secondary" (click)=" isForEdit ? onEditSubmit() : submitCategory()">{{isForEdit ? 'Edit':'Submit'}}</button>
+                    </div>
+                    <div class="col-6 text-center">
+                        <button class="btn btn-danger" (click)="this.parentForm.reset()">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
