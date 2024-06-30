@@ -9,8 +9,76 @@
 
 <div class="row">
     <div class="col-12">
-        <table class="table table-border">
-            
-        </table>
+        @if(selectMode == '1'){
+            <table class="table table-border">
+                <thead>
+                    <tr class="text-center" >
+                        <th>Ticket No.</th>
+                        <th>Deprt. Name</th>
+                        <th>Created By</th>
+                        <th>Contact No.</th>
+                        <th>Created Date</th>
+                        <th>State</th>
+                        <th>Assigned To</th>
+                        <th>Category</th>
+                        <th>Sub Category</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (ticket of ticketList; track $index) {
+                        <tr class="text-center">
+                            <td>{{ticket.ticketNo}}</td>
+                            <td>{{ticket.deptName}}</td>
+                            <td>{{ticket.createdByEmployee}}</td>
+                            <td>{{ticket.contactNo}}</td>
+                            <td>{{ticket.createdDate}}</td>
+                            <td>{{ticket.state}}</td>
+                            <td>{{ticket.assignedToEmployee}}</td>
+                            <td>{{ticket.parentCategory}}</td>
+                            <td>{{ticket.childCategory}}</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }@else {
+            <table class="table table-border">
+                <thead>
+                    <tr class="text-center" >
+                        <th>Ticket No.</th>
+                        <th>Created By</th>
+                        <th>Created Date</th>
+                        <th>Completed Date</th>
+                        <th>Expected End Date</th>
+                        <th>State</th>
+                        <th>Category</th>
+                        <th>Sub Category</th>
+                        <th>Details</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (ticket of ticketList; track $index) {
+                        <tr class="text-center">
+                            <td>{{ticket.ticketNo}}</td>
+                            <td>{{ticket.employeeName}}</td>
+                            <td>{{ticket.createdDate}}</td>
+                            <td>{{ticket.completedDate}}</td>
+                            <td>{{ticket.expectedEndDate}}</td>
+                            <td>{{ticket.state}}</td>
+                            <td>{{ticket.parentCategoryName}}</td>
+                            <td>{{ticket.childCategroyName}}</td>
+                            <td>{{ticket.requestDetails}}</td>
+                            <td>
+                                @if (ticket.state == 'Assigned') {
+                                    <button class="btn btn-success" (click)="changeTicketState('Start',ticket.ticketId)" >Start</button>
+                                }@else if(ticket.state == 'In-Progress') {
+                                    <button class="btn btn-danger" (click)="changeTicketState('Close',ticket.ticketId)">Close</button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
     </div>
 </div>

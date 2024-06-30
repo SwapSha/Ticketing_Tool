@@ -18,7 +18,7 @@ export class EmployeeService {
   }
 
   updateEmployee(newEmpData:any){
-    return this.http.patch(`${this.apiURL}/UpdateEmployee`,newEmpData)
+    return this.http.put(`${this.apiURL}/UpdateEmployee`,newEmpData)
   }
 
   deleteEmployee(empID:number){

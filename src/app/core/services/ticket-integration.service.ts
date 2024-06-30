@@ -14,10 +14,17 @@ export class TicketIntegrationService {
   }
 
   getTicketsCreatedByLoggedEmp(id:number){
-    return this.http.get(`${this.apiURL}/GetTicketsCreatedByEmpId?id=${id}`);
+    return this.http.get(`${this.apiURL}/GetTicketsCreatedByEmpId?empId=${id}`);
   }
 
   getTicketAssignedToEmp(id:number){
-    return this.http.get(`${this.apiURL}/GetAssignedTicketsByEmpId?id=${id}`);
+    return this.http.get(`${this.apiURL}/GetAssignedTicketsByEmpId?empId=${id}`);
+  }
+
+  startTicketById(id:number){
+    return this.http.post(`${this.apiURL}/startTicket?id=${id}`,{});
+  }
+  closeTicketById(id:number){
+    return this.http.post(`${this.apiURL}/closeTicket?id=${id}`,{});
   }
 }

@@ -83,18 +83,21 @@ export class EmployeeComponent {
 
   onEditSubmit(){
     let payload = {
-      employeeId: this.employeeForm.value.employeeId ,
+      employeeId: Number(this.employeeForm.value.employeeId) ,
       employeeName: this.employeeForm.value.employeeName,
       contactNo: this.employeeForm.value.contactNo,
       emailId: this.employeeForm.value.emailId,
       role: this.employeeForm.value.role,
-      deptId: this.employeeForm.value.deptId,
+      deptId: Number(this.employeeForm.value.deptId),
       gender: this.employeeForm.value.gender,
       password: this.employeeForm.value.password
     }
     this.employeeApi.updateEmployee(payload).subscribe({
-      next:(res)=>{
-        console.log(res);
+      next:(res:any)=>{
+        if(res.result){
+          this.employeeForm.reset();
+          this.getEmployeeData();
+        }
       },
       error:(err)=>{
         console.log(err);
