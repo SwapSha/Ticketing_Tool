@@ -1,1 +1,144 @@
-<p>employee works!</p>
+<div class="row">
+    <div class="col-8 ps-0 pe-0 my-2">
+        <div class="card">
+            <div class="card-header bg-primary">
+                Employee List
+            </div>
+            <div class="card-body pt-0">
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Sr. No.</th>
+                                    <th>Emp. ID</th>
+                                    <th>Emp. Name</th>
+                                    <th>Emp. Cont.</th>
+                                    <th>Dept ID</th>
+                                    <th>Dept Name</th>
+                                    <th>Role</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (emp of employeeList; track $index) {
+                                    <tr class="text-center">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{emp.employeeId}}</td>
+                                        <td>{{emp.employeeName}}</td>
+                                        <td>{{emp.contactNo}}</td>
+                                        <td>{{emp.deptId}}</td>
+                                        <td>{{emp.deptName}}</td>
+                                        <td>{{emp.role}}</td>
+                                        <td>
+                                            <button class="btn btn-info" (click)="onEditClick(emp)">Edit</button>
+                                            <button class="btn btn-danger mx-2" (click)="onDeleteClick(emp.employeeId)">Delete</button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 ps-0 pe-0 my-2">
+        <div class="card">
+            <div class="card-header bg-primary">
+               New Employee Form
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="card bg-light">
+                        <article class="card-body mx-auto" style="max-width: 400px;">
+                            <h4 class="card-title mt-3 text-center">Create Employee Account</h4>
+                            <!-- <p class="text-center">Get started with your free account</p>
+                            <p>
+                                <a href="" class="btn btn-block btn-twitter"> <i class="bi bi-twitter"></i>Login via Twitter</a>
+                                <a href="" class="btn btn-block btn-facebook"> <i class="bi bi-facebook"></i>Login via facebook</a>
+                            </p> -->
+                            <!-- <p class="divider-text">
+                                <span class="bg-light">OR</span>
+                            </p> -->
+                            <form [formGroup]="employeeForm">
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="bi bi-person-circle"></i> </span>
+                                 </div>
+                                <input name="" class="form-control" placeholder="Full name" type="text" formControlName="employeeName">
+                            </div> <!-- form-group// -->
+                            <div class="form-group input-group mt-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="bi bi-envelope"></i> </span>
+                                 </div>
+                                <input name="" class="form-control" placeholder="Email address" type="email" formControlName="emailId">
+                            </div> <!-- form-group// -->
+                            <div class="form-group input-group mt-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="bi bi-phone"></i> </span>
+                                </div>
+                                <!-- <select class="custom-select" style="max-width: 120px;">
+                                    <option selected="">+971</option>
+                                    <option value="1">+972</option>
+                                    <option value="2">+198</option>
+                                    <option value="3">+701</option>
+                                </select> -->
+                                <input name="" class="form-control" placeholder="Phone number" type="text" formControlName="contactNo">
+                            </div> <!-- form-group// -->
+                            <div class="form-group input-group mt-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="bi bi-person-rolodex"></i> </span>
+                                </div>
+                                <select class="custom-select" formControlName="deptId">
+                                    <option [selected]="true" value="" >Select Department</option>
+                                        @for (dept of deptList; track $index) {
+                                            <option [value]="dept.deptId">{{dept.deptName}}</option>
+                                        }
+                                    </select>
+                            </div> <!-- form-group// -->
+                            <div class="form-group input-group mt-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="bi bi-building"></i> </span>
+                                </div>
+                                <select class="custom-select" formControlName="role">
+                                    <option [selected]="true" value=""> Select job type</option>
+                                    @for (role of roleList; track $index) {
+                                        <option [value]="role">{{role}}</option>
+                                    }                                    
+                                </select>
+                            </div> <!-- form-group end.// -->
+                            <div class="form-check input-group mt-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text ms-2"> <i class="bi bi-gender-male"></i> </span>
+                                </div>
+                                <input class="form-check-input ms-2" placeholder="Create password" name="gender" type="radio" value="Male" formControlName="gender">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text ms-2"> <i class="bi bi-gender-female"></i> </span>
+                                </div>
+                                <input class="form-check-input ms-2" placeholder="Create password" name="gender" type="radio" value="Female" formControlName="gender">
+                            </div>
+                            <div class="form-group input-group mt-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="bi bi-lock"></i> </span>
+                                </div>
+                                <input class="form-control" placeholder="Create password" type="password" formControlName="password">
+                            </div> <!-- form-group// -->
+                            <!-- <div class="form-group input-group mt-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="bi bi-lock-fill"></i> </span>
+                                </div>
+                                <input class="form-control" placeholder="Repeat password" type="password">
+                            </div>  -->
+                            <div class="form-group mt-2">
+                                <button type="submit" class="btn btn-primary btn-block" (click)="isForEdit ? onEditSubmit() : onFormSubmit()">{{ isForEdit ? 'Edit Account': 'Create Account'  }}</button>
+                            </div> <!-- form-group// -->                                                             
+                        </form>
+                        </article>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>

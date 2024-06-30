@@ -7,6 +7,8 @@ import { DepartmentComponent } from './pages/department/department.component';
 import { Error404Component } from './pages/error-404/error-404.component';
 import { ParentCategoryComponent } from './pages/parent-category/parent-category.component';
 import { CategoryComponent } from './pages/category/category.component';
+import { NewTicketComponent } from './pages/new-ticket/new-ticket.component';
+import { TicketListComponent } from './pages/ticket-list/ticket-list.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -17,7 +19,10 @@ export const routes: Routes = [
             {path:'department',component:DepartmentComponent},
             {path:'employee',component:EmployeeComponent},
             {path:'category',component:CategoryComponent},
+            {path:'employee',component:EmployeeComponent},
             {path:'parent-category',component:ParentCategoryComponent},
+            {path:'new-ticket',component:NewTicketComponent},
+            {path:'ticket-list',component:TicketListComponent},
         ]
     },
     {path:'**',component:Error404Component}

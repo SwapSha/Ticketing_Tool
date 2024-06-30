@@ -24,4 +24,7 @@ export class ApiIntegrationService {
   deleteDepartment(departId:any){
     return this.http.delete(`${this.apiURL}/DeleteDepartment?id=${departId}`);
   }
+  getAllRole(){
+    return this.http.get(`${this.apiURL}/GetAllRoles`);
+  }
 }

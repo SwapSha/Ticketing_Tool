@@ -1,1 +1,16 @@
-<p>ticket-list works!</p>
+<div class="row">
+    <div class="col-12 text-center">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" (click)="changeMode('1')"  [ngClass]=" selectMode == '1' ? 'btn btn-primary' : 'btn btn-secondary' ">My Tickets</button>
+            <button type="button" (click)="changeMode('2')" class="ms-2" [ngClass]=" selectMode == '2' ? 'btn btn-primary' : 'btn btn-secondary' ">Assigned Tickets</button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <table class="table table-border">
+            
+        </table>
+    </div>
+</div>

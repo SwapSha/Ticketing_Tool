@@ -1,1 +1,64 @@
-<p>new-ticket works!</p>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-primary">
+                New Ticket
+            </div>
+            <form [formGroup]="ticketForm">
+                <div class="card-body">
+                    <div class="row mt-1">
+                        <div class="col-3">
+                            <label for="severity">Select Severity</label>
+                            <select name="" id="" class="form-select" formControlName="severity">
+                                <option selected hidden value="" >Select</option>
+                                <option >Low</option>
+                                <option >Medium</option>
+                                <option >High</option>
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <label for="severity">Select Department</label>
+                            <select name="" id="" class="form-select" formControlName="deptId">
+                                <option [selected]="true" hidden value="">Select</option>
+                                @for (deprt of departList; track $index) {
+                                    <option [value]="deprt.deptId" >{{deprt.deptName}}</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-3">
+                            <label for="severity">Select Parent Category</label>
+                                <select name="" id="" class="form-select" (change)="filterParentCategory($event.target)">
+                                    <option selected hidden value="" >Select</option>
+                                    @for (parent of parentData; track $index) {
+                                        <option [value]="parent.categoryName" >{{parent.categoryName}}</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <label for="severity">Select Child Category</label>
+                                <select name="" id="" class="form-select" formControlName="childCategoryId" >
+                                    <option value="" [selected]="true" hidden >Select</option>
+                                    @for (child of filterParent; track $index) {
+                                        <option [value]="child.childCategoryId" >{{child.categoryName}}</option>
+                                    }
+                                </select>
+                            </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-6">
+                            <label for="severity">Ticket Details</label>
+                            <textarea name="" class="form-control" id="" formControlName="requestDetails" ></textarea>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-6 text-center">
+                            <button (click)="onSubmitTicket()" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
